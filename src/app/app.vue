@@ -1,6 +1,7 @@
 <template>
   <h3>{{ name }}</h3>
-  <input type="text" @keyup.enter="keys" />
+  <input type="text" v-model.trim="content" @change="onContent" />
+  <span>-> Content {{ content }}</span>
 </template>
 
 <script>
@@ -8,15 +9,12 @@ export default {
   data() {
     return {
       name: '李依恒',
-      category: '',
+      content: '天地玄黄',
     };
   },
   methods: {
-    keys(event) {
-      // if (event.key === 'Enter') {
-      //   console.log('回车！！');
-      // }
-      console.log('回车！！');
+    onContent() {
+      console.log(this.content, this.content.length);
     },
   },
 };
