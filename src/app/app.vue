@@ -1,6 +1,6 @@
 <template>
   <h3>{{ name }}</h3>
-  <input type="text" @input="oneServer" />
+  <input type="text" @change="onContent" />
 </template>
 
 <script>
@@ -12,8 +12,8 @@ export default {
     };
   },
   methods: {
-    oneServer(event) {
-      console.log(event);
+    onContent(event) {
+      console.log(event.target.value);
     },
   },
 };
