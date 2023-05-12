@@ -1,6 +1,6 @@
 <template>
   <h3>{{ name }}</h3>
-  <input type="text" v-model="content" />
+  <textarea v-model="content" placeholder="写点东西吧"></textarea>
   <span> -> Content: {{ content }}</span>
 </template>
 
@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       name: '李依恒',
-      content: '天地玄黄',
+      content: '',
     };
   },
 };
