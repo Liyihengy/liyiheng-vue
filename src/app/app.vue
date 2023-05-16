@@ -1,10 +1,10 @@
 <template>
   <h3 @click="name = 'NINGHAOWANG'">{{ name }}</h3>
-  <div @click="user.name = '李依恒'">{{ user.name }}</div>
+  <div @click="userName = '李依恒'">{{ userName }}</div>
 </template>
 
 <script>
-import { ref, reactive } from 'vue';
+import { ref, reactive, toRefs } from 'vue';
 export default {
   setup() {
     const name = ref('宁皓网');
@@ -13,9 +13,11 @@ export default {
       name: 'LIYIHENG',
     });
 
+    // const { userName } = toRefs(user);
+
     return {
       name,
-      user,
+      ...toRefs(user),
     };
   },
 };
