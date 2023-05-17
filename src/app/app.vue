@@ -8,6 +8,7 @@
       :value="post.title"
       @keyup.enter="updatePost($event, post.id)"
     />
+    <button @click="deletePost(post.id)">删除</button>
     {{ post.title }} - {{ post.user.name }} - {{ post.content }}
   </div>
 </template>
@@ -45,19 +46,33 @@ export default {
   },
 
   methods: {
+    async deletePost(postId) {
+      try {
+        await apiHttpClient.delete(`/posts/${postId}`, {
+          headers: { Authorization: `Bearer ${this.token}` },
+        });
+
+        this.getPost();
+      } catch (error) {
+        this.errorMessage = error.message;
+      }
+    },
+
     async updatePost(event, postId) {
       console.log(event.target.value);
       console.log(postId);
-
-      await apiHttpClient.patch(
-        `/posts/${postId}`,
-        {
-          title: event.target.value,
-        },
-        { headers: { Authorization: `Bearer ${this.token}` } },
-      );
-
-      this.getPost();
+      try {
+        await apiHttpClient.patch(
+          `/posts/${postId}`,
+          {
+            title: event.target.value,
+          },
+          { headers: { Authorization: `Bearer ${this.token}` } },
+        );
+        this.getPost();
+      } catch (error) {
+        this.errorMessage = error.message;
+      }
     },
 
     async getPost() {
