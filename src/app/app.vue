@@ -12,26 +12,19 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      name: '李依恒',
+      name: '宁皓网',
       posts: [],
       errorMessage: '',
     };
   },
 
-  created() {
-    axios
-      .get('http://localhost:3000/posts1')
-      .then((response) => {
-        console.log(response);
-
-        this.posts = response.data;
-      })
-      .catch((error) => {
-        console.log(error.message);
-        console.log(error.response);
-
-        this.errorMessage = error.message;
-      });
+  async created() {
+    try {
+      const response = await axios.get('http://localhost:3000/posts');
+      this.posts = response.data;
+    } catch (error) {
+      this.errorMessage = error.message;
+    }
   },
 };
 </script>
