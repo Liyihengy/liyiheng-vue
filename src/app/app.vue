@@ -20,7 +20,15 @@ export default {
 
   async created() {
     try {
-      const response = await axios.get('http://localhost:3000/posts');
+      const response = await axios({
+        method: 'get',
+        url: '/posts',
+        baseURL: 'http://localhost:3000',
+        headers: {
+          'X-Custom': 'NINGHAO',
+        },
+      });
+
       this.posts = response.data;
     } catch (error) {
       this.errorMessage = error.message;
