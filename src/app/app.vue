@@ -1,5 +1,8 @@
 <template>
   <h3>{{ name }}</h3>
+
+  <userLogin></userLogin>
+
   <input type="text" v-model="title" @keyup.enter="createPost" />
   <div>{{ errorMessage }}</div>
   <div v-for="post in posts" :key="post.id">
@@ -15,6 +18,7 @@
 
 <script>
 import { apiHttpClient } from './app.service';
+import userLogin from '../user/components/user-login.vue';
 
 export default {
   data() {
@@ -106,6 +110,8 @@ export default {
       }
     },
   },
+
+  components: { userLogin },
 };
 </script>
 
