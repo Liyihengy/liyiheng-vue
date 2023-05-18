@@ -26,6 +26,10 @@
     accept="image/png,image/jpeg,image/jpg"
   />
 
+  <div v-if="imagePreviewUrl">
+    <img class="image-preview" :src="imagePreviewUrl" />
+  </div>
+
   <div>{{ errorMessage }}</div>
   <div v-for="post in posts" :key="post.id">
     <input
@@ -53,6 +57,7 @@ export default {
       title: '',
       currentUser: null,
       file: null,
+      imagePreviewUrl: null,
     };
   },
 
@@ -77,6 +82,19 @@ export default {
   },
 
   methods: {
+    createImagePreview(file) {
+      //创建图像读取
+      const reader = new FileReader();
+
+      //读取图像文件
+      reader.readAsDataURL(file);
+
+      //读取成功后会执行这个方法
+      reader.onload = (event) => {
+        this.imagePreviewUrl = event.target.result;
+      };
+    },
+
     onChangeFiles(event) {
       console.log(event.target.files);
       const file = event.target.files[0];
@@ -84,6 +102,9 @@ export default {
       if (file) {
         this.file = file;
         this.title = file.name.split('.')[0];
+
+        //生成浏览文件
+        this.createImagePreview(file);
       }
     },
 
