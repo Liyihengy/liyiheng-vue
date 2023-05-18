@@ -9,6 +9,7 @@
 
   <div v-if="currentUser">
     <div>{{ currentUser.name }}</div>
+    <button @click="logout">退出登录</button>
   </div>
 
   <input
@@ -68,6 +69,13 @@ export default {
   },
 
   methods: {
+    logout() {
+      this.token = '';
+      this.currentUser = null;
+
+      localStorage.removeItem('tid');
+      localStorage.removeItem('uid');
+    },
     async getCurrentUser(userId) {
       try {
         const response = await apiHttpClient.get(`/users/${userId}`);
