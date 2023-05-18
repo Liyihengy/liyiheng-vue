@@ -19,6 +19,13 @@
     @keyup.enter="createPost"
     placeholder="输入内容标题"
   />
+
+  <input
+    type="file"
+    @change="onChangeFiles"
+    accept="image/png,image/jpeg,image/jpg"
+  />
+
   <div>{{ errorMessage }}</div>
   <div v-for="post in posts" :key="post.id">
     <input
@@ -45,6 +52,7 @@ export default {
       token: '',
       title: '',
       currentUser: null,
+      file: null,
     };
   },
 
@@ -69,6 +77,16 @@ export default {
   },
 
   methods: {
+    onChangeFiles(event) {
+      console.log(event.target.files);
+      const file = event.target.files[0];
+
+      if (file) {
+        this.file = file;
+        this.title = file.name.split('.')[0];
+      }
+    },
+
     logout() {
       this.token = '';
       this.currentUser = null;
