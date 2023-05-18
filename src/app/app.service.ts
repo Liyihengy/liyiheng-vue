@@ -1,5 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
+// 设置默认的 baseURL
 axios.defaults.baseURL = 'http://localhost:3000';
 
 /**
@@ -31,8 +32,6 @@ axios.interceptors.response.use(
 /**
  * 创建axios实例
  */
-const apiHttpClient = axios.create({
-  baseURL: 'http://localhost:3000',
-});
+const apiHttpClient: AxiosInstance = axios.create();
 
 export { axios, apiHttpClient };
