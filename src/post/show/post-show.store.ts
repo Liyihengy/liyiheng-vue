@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
-import { RootState } from '@/app/app.store';
-import { apiHttpClient } from '@/app/app.service';
+import { apiHttpClient } from '../../app/app.service';
+import { RootState } from '../../app/app.store';
 
 export interface Post {
   id: number;
@@ -13,7 +13,7 @@ export interface PostShowStoreState {
   post: Post;
 }
 
-export const PostShowStoreModule: Module<PostShowStoreState, RootState> = {
+export const postShowStoreModule: Module<PostShowStoreState, RootState> = {
   namespaced: true,
 
   state: {
@@ -33,7 +33,7 @@ export const PostShowStoreModule: Module<PostShowStoreState, RootState> = {
 
   mutations: {
     setLoading(state, data) {
-      state.loading = data;
+      state.post = data;
     },
 
     setPost(state, data) {
@@ -46,14 +46,14 @@ export const PostShowStoreModule: Module<PostShowStoreState, RootState> = {
       commit('setLoading', true);
 
       try {
-        const response = await apiHttpClient.get(`/post/${postId}`);
-
+        const response = await apiHttpClient.get(`/posts/${postId}`);
         commit('setLoading', false);
         commit('setPost', response.data);
 
         return response;
       } catch (error) {
         commit('setLoading', false);
+
         throw (error as any).response;
       }
     },

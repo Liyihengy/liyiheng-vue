@@ -1,16 +1,16 @@
-import { RootState } from '@/app/app.store';
 import { Module } from 'vuex';
+import { RootState } from '../../app/app.store';
 
-export interface PostCreateState {
+export interface PostCreateStoreState {
   loading: boolean;
 }
 
-export const postCreateStoreModule: Module<PostCreateState, RootState> = {
+export const postCreateStoreModule: Module<PostCreateStoreState, RootState> = {
   namespaced: true,
 
   state: {
     loading: false,
-  } as PostCreateState,
+  } as PostCreateStoreState,
 
   getters: {
     loading(state) {

@@ -1,17 +1,20 @@
 import { Module } from 'vuex';
-import { PostCreateState, postCreateStoreModule } from './create/post-create';
-import { RootState } from '@/app/app.store';
+import { RootState } from '../app/app.store';
+import {
+  postCreateStoreModule,
+  PostCreateStoreState,
+} from './create/post-create';
 import { postIndexStoreModule } from './index/post-index.store';
-import { PostShowStoreModule } from './show/post-show.store';
+import { postShowStoreModule } from './show/post-show.store';
 
 export interface PostItem {
   id: number;
-  name: string;
+  title: string;
   content: string;
 }
 
 export interface PostStoreState {
-  create: PostCreateState;
+  create: PostCreateStoreState;
 }
 
 export const postStoreModule: Module<PostStoreState, RootState> = {
@@ -20,6 +23,6 @@ export const postStoreModule: Module<PostStoreState, RootState> = {
   modules: {
     create: postCreateStoreModule,
     index: postIndexStoreModule,
-    show: PostShowStoreModule,
+    show: postShowStoreModule,
   },
 };
