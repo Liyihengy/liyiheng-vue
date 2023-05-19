@@ -6,8 +6,12 @@
 export default {
   data() {
     return {
-      name: '李依恒',
+      name: '宁皓网',
     };
+  },
+
+  created() {
+    console.log(this.$store.state);
   },
 };
 </script>
