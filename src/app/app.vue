@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import { socket } from './app.service';
+
 export default {
   data() {
     return {
@@ -15,6 +17,13 @@ export default {
 
   created() {
     console.log(this.$store.state);
+
+    //监听服务端事件
+    socket.on('connect', () => {
+      console.log('connect', socket.id);
+
+      socket.emit('greet', `你好服务器，我是${socket.id}`);
+    });
   },
 };
 </script>
